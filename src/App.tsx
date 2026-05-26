@@ -105,6 +105,7 @@ export default function App() {
   // Loading & Custom Notification Toast States
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasBlockedCookies, setHasBlockedCookies] = useState<boolean>(false);
 
   // Inquiry form state
   const [inquiryName, setInquiryName] = useState('');
@@ -163,6 +164,53 @@ export default function App() {
       setIsInquirySubmitting(false);
     }
   };
+
+  // Helper to intercept iframe blocking HTML pages and throw clear error
+  const safeFetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    try {
+      const res = await window.fetch(input, init);
+      
+      // Clone response to safely read text and see if it's the iframe restriction cookie block page
+      const clone = res.clone();
+      try {
+        const text = await clone.text();
+        const lowerText = text.toLowerCase();
+        
+        if (
+          lowerText.includes('blocking a required security cookie') ||
+          lowerText.includes('redirecttoreturnurl') ||
+          lowerText.includes('grantstorageaccess') ||
+          lowerText.includes('action required to load your app') ||
+          lowerText.includes('<!doctype html>') ||
+          lowerText.includes('<html') ||
+          lowerText.trim().startsWith('<')
+        ) {
+          setHasBlockedCookies(true);
+          throw new Error('IFRAME_COOKIE_BLOCKED_BY_BROWSER');
+        }
+      } catch (cloneErr: any) {
+        if (cloneErr.message === 'IFRAME_COOKIE_BLOCKED_BY_BROWSER') {
+          throw cloneErr;
+        }
+      }
+
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.includes('text/html')) {
+        setHasBlockedCookies(true);
+        throw new Error('IFRAME_COOKIE_BLOCKED_BY_BROWSER');
+      }
+
+      return res;
+    } catch (err: any) {
+      if (err.message === 'IFRAME_COOKIE_BLOCKED_BY_BROWSER') {
+        setHasBlockedCookies(true);
+      }
+      throw err;
+    }
+  };
+
+  // Shadow global fetch so all native fetch() calls go through safeFetch
+  const fetch = safeFetch;
 
   // Run initial loading
   useEffect(() => {
@@ -553,7 +601,7 @@ export default function App() {
     }
     setIsLoading(true);
     try {
-      const res = await fetch('/api/user/register', {
+      const res = await safeFetch('/api/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -576,7 +624,11 @@ export default function App() {
       }
     } catch (err: any) {
       console.error('Registration failed:', err);
-      showToast(`Network error: ${err?.message || 'Please check your connection and try again.'}`, 'error');
+      if (err?.message === 'IFRAME_COOKIE_BLOCKED_BY_BROWSER') {
+        showToast('Iframe protection blocked cookies. Please click "Open in New Tab" at the top-right of the preview to register!', 'error');
+      } else {
+        showToast(`Network error: ${err?.message || 'Please check your connection and try again.'}`, 'error');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -603,7 +655,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch(url, {
+      const res = await safeFetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: loginEmail, password: loginPassword })
@@ -625,7 +677,11 @@ export default function App() {
       }
     } catch (err: any) {
       console.error('Login failed:', err);
-      showToast(`Failed to connect to authentication server: ${err?.message || 'Server down'}`, 'error');
+      if (err?.message === 'IFRAME_COOKIE_BLOCKED_BY_BROWSER') {
+        showToast('Iframe protection blocked cookies. Please click "Open in New Tab" at the top-right of the preview to log in!', 'error');
+      } else {
+        showToast(`Failed to connect to authentication server: ${err?.message || 'Server down'}`, 'error');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -745,6 +801,26 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col selection:bg-teal-500 selection:text-white">
+      
+      {/* Dynamic Iframe & Cookie Block Banner */}
+      {(hasBlockedCookies || window.self !== window.top) && (
+        <div id="iframe-sandbox-cookie-banner" className="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-white text-[12px] md:text-sm py-3 px-4 flex flex-col md:flex-row items-center justify-between gap-3 font-sans shadow-md select-none border-b border-amber-400">
+          <div className="flex items-center gap-2.5">
+            <span className="text-base select-none leading-none">⚠️</span>
+            <div className="text-left">
+              <span className="font-extrabold text-white">Browser Security & Sandbox Restriction Detected:</span>{' '}
+              <span className="text-amber-50">Modern browsers block secure session tracking inside this embedded iframe. Open in a new tab to register or sign in successfully.</span>
+            </div>
+          </div>
+          <button 
+            type="button"
+            onClick={() => window.open(window.location.href, '_blank')}
+            className="bg-white text-amber-950 hover:bg-amber-50 transition-colors font-extrabold px-3.5 py-1.5 rounded-full text-xs shadow-md flex items-center gap-1.5 shrink-0"
+          >
+            Open in New Tab ↗
+          </button>
+        </div>
+      )}
       
       {/* 1. Global Alert Toast */}
       {toast && (
@@ -1348,6 +1424,20 @@ export default function App() {
               <div className="text-center space-y-2 mb-6">
                 <h1 className="text-2xl font-black text-slate-950">Secure Portal</h1>
                 <p className="text-xs text-slate-500">Sign in to coordinate schedules & manage active clinics.</p>
+              </div>
+
+              {/* Iframe detection cookie warning */}
+              <div className="bg-amber-50 border border-amber-200 p-4 rounded-2xl mb-6 text-amber-900 text-xs flex gap-3 items-start shadow-sm">
+                <div className="text-amber-500 font-bold text-lg select-none leading-none">⚠️</div>
+                <div className="space-y-1">
+                  <p className="font-bold">Iframe Preview Cookie Notice</p>
+                  <p className="text-[11px] leading-relaxed text-amber-800">
+                    If you encounter <strong>Network Errors</strong> or JSON parser issues when registering or signing in, your browser has blocked secure tracking/sandbox cookies inside this nestled iframe.
+                  </p>
+                  <p className="text-[11px] leading-relaxed font-semibold text-teal-700 pt-1.5">
+                    👉 Open the application in a <strong className="font-extrabold underline">New Tab</strong> by clicking the icon at the top-right of your preview window to bypass browser blocks instantly!
+                  </p>
+                </div>
               </div>
 
               {/* Login Channels Selector */}

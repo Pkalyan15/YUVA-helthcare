@@ -521,9 +521,16 @@ async function start() {
     });
   }
 
+  // Under Vercel serverless environment, we omit the persistent network listener bind
+  if (process.env.VERCEL === '1') {
+    return;
+  }
+
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Yuvacare Server running successfully at http://localhost:${PORT}`);
   });
 }
 
 start();
+
+export { app };
