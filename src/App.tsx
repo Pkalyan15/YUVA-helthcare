@@ -106,9 +106,62 @@ export default function App() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // Inquiry form state
+  const [inquiryName, setInquiryName] = useState('');
+  const [inquiryMsg, setInquiryMsg] = useState('');
+  const [isInquirySubmitting, setIsInquirySubmitting] = useState(false);
+
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
+  };
+
+  const handleInquirySubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!inquiryName.trim()) {
+      showToast('Please enter your name.', 'error');
+      return;
+    }
+    if (!inquiryMsg.trim()) {
+      showToast('Please write an inquiry message.', 'error');
+      return;
+    }
+
+    setIsInquirySubmitting(true);
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/anthatipavankalyan15@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: inquiryName,
+          email: 'anonymous@yuvacare-user.com',
+          message: inquiryMsg,
+          _subject: `New Yuvacare Clinic Inquiry from ${inquiryName}`
+        })
+      });
+
+      if (response.ok) {
+        showToast('Enquiry sent directly to admin Gmail!', 'success');
+        setInquiryName('');
+        setInquiryMsg('');
+      } else {
+        throw new Error('FormSubmit endpoint failed');
+      }
+    } catch (error) {
+      console.error('Error sending enquiry mail:', error);
+      // Fallback: Trigger direct mailto protocol in browser so it opens mail client prefilled
+      const emailSubject = encodeURIComponent(`Yuvacare Inquiry from ${inquiryName}`);
+      const emailBody = encodeURIComponent(`Inquiry Details from ${inquiryName}:\n\n${inquiryMsg}`);
+      window.location.href = `mailto:anthatipavankalyan15@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+      showToast('Opening preferred mail client to send...', 'success');
+      setInquiryName('');
+      setInquiryMsg('');
+    } finally {
+      setIsInquirySubmitting(false);
+    }
   };
 
   // Run initial loading
@@ -2308,17 +2361,37 @@ export default function App() {
                 <h3 className="text-xl font-bold text-slate-950">Instant Message</h3>
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Title / Name</label>
-                  <input type="text" placeholder="Your Name" className="w-full bg-slate-50 border p-3 rounded-xl text-xs focus:bg-white" />
+                  <input 
+                    type="text" 
+                    value={inquiryName}
+                    onChange={(e) => setInquiryName(e.target.value)}
+                    placeholder="Your Name" 
+                    className="w-full bg-slate-50 border p-3 rounded-xl text-xs focus:bg-white" 
+                  />
                 </div>
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Description / Inquiry</label>
-                  <textarea placeholder="Write message to administrator..." className="w-full bg-slate-50 border p-3 rounded-xl text-xs focus:bg-white" rows={3}></textarea>
+                  <textarea 
+                    value={inquiryMsg}
+                    onChange={(e) => setInquiryMsg(e.target.value)}
+                    placeholder="Write message to administrator..." 
+                    className="w-full bg-slate-50 border p-3 rounded-xl text-xs focus:bg-white" 
+                    rows={3}
+                  ></textarea>
                 </div>
                 <button 
-                  onClick={() => showToast('Thank you! Inquiry forwarded successfully.')}
-                  className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold p-3 rounded-xl text-xs cursor-pointer block transition-colors"
+                  onClick={() => handleInquirySubmit()}
+                  disabled={isInquirySubmitting}
+                  className={`w-full ${isInquirySubmitting ? 'bg-teal-400 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700'} text-white font-bold p-3 rounded-xl text-xs cursor-pointer block transition-colors flex items-center justify-center gap-1`}
                 >
-                  SEND ENQUIRY MAIL
+                  {isInquirySubmitting ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-1"></span>
+                      SENDING...
+                    </>
+                  ) : (
+                    'SEND ENQUIRY MAIL'
+                  )}
                 </button>
               </div>
             </div>

@@ -121,7 +121,7 @@ app.post('/api/user/register', async (req, res) => {
     const token = jwt.sign({ id: userId, role: 'patient' }, JWT_SECRET, { expiresIn: '7d' });
     res.json({ success: true, token, user: { id: userId, name, email, role: 'patient' } });
   } catch (error: any) {
-    res.status(500).json({ success: true, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
