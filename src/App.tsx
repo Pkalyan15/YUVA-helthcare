@@ -30,6 +30,7 @@ import {
   XCircle,
   FileText
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { UserProfile, DoctorProfile, Appointment, DashboardStats } from './types';
 
 export default function App() {
@@ -2544,6 +2545,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
