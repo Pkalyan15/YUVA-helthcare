@@ -871,7 +871,7 @@ export default function App() {
                     <div>
                       <Stethoscope className="w-12 h-12 text-teal-400 mb-6" />
                       <h3 className="text-2xl font-bold font-sans">Yuvacare Health</h3>
-                      <p className="text-xs font-semibold tracking-widest text-teal-400/80 uppercase mt-1">Noble College, Bangalore</p>
+                      <p className="text-xs font-semibold tracking-widest text-teal-400/80 uppercase mt-1">Integrated Clinical Network</p>
                     </div>
 
                     <div className="space-y-4">
@@ -883,8 +883,8 @@ export default function App() {
                         </div>
                       </div>
                       <div className="flex justify-between items-center text-xs text-white/50 pt-2 font-mono">
-                        <span>VI Semester BCA</span>
-                        <span>Project 2025-2026</span>
+                        <span>Bangalore Central</span>
+                        <span>Authorized Portal</span>
                       </div>
                     </div>
                   </div>
@@ -2210,7 +2210,7 @@ export default function App() {
           <div className="max-w-4xl mx-auto px-4 py-16 space-y-12 animate-fade-in text-justify">
             <div className="space-y-2 text-center pb-6 border-b">
               <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">About Yuvacare Online Healthcare</h1>
-              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">VI Semester BCA Project Noble College Bengaluru</p>
+              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">Modern Medical Consultation & Diagnosis Booking Network</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
@@ -2226,18 +2226,29 @@ export default function App() {
 
               <div className="bg-teal-50/50 border border-teal-100 rounded-3xl p-6.5 space-y-4 shadow-sm">
                 <span className="text-xs font-bold text-teal-700 bg-teal-100 px-3 py-1 rounded-full uppercase tracking-wider">
-                  Academic Project Details
+                  Key Healthcare Features
                 </span>
-                <div className="text-xs space-y-2 pt-2">
-                  <p className="text-slate-500">Submitted in partial fulfillment of Bengaluru City University award rules:</p>
-                  <p className="font-bold text-slate-800">Noble College Dept. of Computer Science</p>
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 mt-2 text-slate-600">
-                    <p className="font-bold text-slate-800 mb-1">Creative Team Members:</p>
-                    <ul className="list-disc pl-4 space-y-1 text-[11px]">
-                      <li>A Pawan Kalyan (U18FE23S0005)</li>
-                      <li>B Prasanna Kumar Yadav (U18FE23S0006)</li>
-                      <li>Mohammed Ibrahim (U18FE23S0039)</li>
-                    </ul>
+                <div className="text-xs space-y-4 pt-2">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-1.5 shrink-0"></div>
+                    <div>
+                      <p className="font-bold text-slate-800">Verified Medical Specialists</p>
+                      <p className="text-slate-500">Every panel consultant undergoes exhaustive registration and background checks.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-1.5 shrink-0"></div>
+                    <div>
+                      <p className="font-bold text-slate-800">Dynamic Slot Auditing</p>
+                      <p className="text-slate-500">Auto-calculated timelines prevent overlapping entries and keep scheduling reliable.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-1.5 shrink-0"></div>
+                    <div>
+                      <p className="font-bold text-slate-800">Direct Inquiries Engine</p>
+                      <p className="text-slate-500">Contact admin or register as an active general doctor in moments.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2329,7 +2340,7 @@ export default function App() {
               Yuvacare online appointment scheduling bridges patient and medical consultants seamlessly in real-time. Created on a TypeScript Node Stack with support for both local file-based database adapters and structured PostgreSQL engines.
             </p>
             <p className="text-[11px] text-slate-500 font-mono">
-              Noble College Bengalore VII semester clinical portal project.
+              Authorized clinical service desk and appointment dashboard portal.
             </p>
           </div>
 
@@ -2345,10 +2356,11 @@ export default function App() {
           </div>
 
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-widest">University Evaluation Statement</h4>
-            <div className="text-xs space-y-2 leading-relaxed text-slate-400 bg-slate-800/50 p-4 rounded-xl border border-slate-800 shadow-sm">
-              <p>Submitted for the degree of <strong>Bachelor of Computer Applications</strong> at <strong>Bengaluru City University</strong> for academic year 2025-2026.</p>
-              <p className="text-[10px] text-teal-400/80 font-mono mt-2">Professors Guide: Mr. Y. Sai Teja</p>
+            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-widest">Clinic Hours & Info</h4>
+            <div className="text-xs space-y-1.5 leading-relaxed text-slate-400 bg-slate-800/50 p-4 rounded-xl border border-slate-800 shadow-sm font-mono">
+              <p>📍 JP Nagar 1st Phase, Bangalore</p>
+              <p>⏰ Mon - Sat: 09:00 AM - 08:00 PM</p>
+              <p>📞 Emergency Care: +91 99000 12345</p>
             </div>
           </div>
 
@@ -2356,10 +2368,10 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
           <p>© 2026 Yuvacare Online Health Systems. Pure relational & file-based schema architecture.</p>
-          <div className="flex gap-4 font-mono text-[10px]">
-            <span>U18FE23S0005</span>
-            <span>U18FE23S0006</span>
-            <span>U18FE23S0039</span>
+          <div className="flex gap-4 font-mono text-[10px] text-slate-500">
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+            <span>Security Support</span>
           </div>
         </div>
       </footer>
