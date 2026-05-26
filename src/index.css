@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3e53ca;
+  --color-primary-hover: #2f3fac;
+  --color-primary-light: #eaefff;
+  --color-primary-border: #c9d8ff;
+
+  /* Map standard teal colors used in the App components to the Yuvacare custom palette */
+  --color-teal-50: #eaefff;
+  --color-teal-100: #e2e5ff;
+  --color-teal-200: #c9d8ff;
+  --color-teal-300: #93b0ff;
+  --color-teal-400: #688aff;
+  --color-teal-500: #496be3;
+  --color-teal-600: #3e53ca;
+  --color-teal-700: #2f3fac;
+  --color-teal-800: #2230a1;
+  --color-teal-900: #1b2582;
+
+  /* Accent states */
+  --color-primary-50: #eaefff;
+  --color-primary-100: #e2e5ff;
+  --color-primary-200: #c9d8ff;
+  --color-primary-600: #3e53ca;
+  --color-primary-700: #2f3fac;
+
+  --font-sans: 'Outfit', sans-serif;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+}
