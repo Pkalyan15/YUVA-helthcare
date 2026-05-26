@@ -246,8 +246,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Error updating profile', 'error');
       }
-    } catch (err) {
-      showToast('API communication error', 'error');
+    } catch (err: any) {
+      console.error('Profile update failed:', err);
+      showToast(`API communication error: ${err?.message || 'Check connection'}`, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -285,8 +286,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Cancellation failed', 'error');
       }
-    } catch (err) {
-      showToast('Network error', 'error');
+    } catch (err: any) {
+      console.error('Cancellation failed:', err);
+      showToast(`Network error: ${err?.message || 'Server did not respond'}`, 'error');
     }
   };
 
@@ -534,8 +536,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Error creating profile', 'error');
       }
-    } catch (err) {
-      showToast('Faulty connection', 'error');
+    } catch (err: any) {
+      console.error('Doctor registration failed:', err);
+      showToast(`Faulty connection: ${err?.message || 'Check request'}`, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -571,8 +574,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Registration failed', 'error');
       }
-    } catch (err) {
-      showToast('Network error', 'error');
+    } catch (err: any) {
+      console.error('Registration failed:', err);
+      showToast(`Network error: ${err?.message || 'Please check your connection and try again.'}`, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -619,8 +623,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Authentication error', 'error');
       }
-    } catch (err) {
-      showToast('Failed to connect to authentication server', 'error');
+    } catch (err: any) {
+      console.error('Login failed:', err);
+      showToast(`Failed to connect to authentication server: ${err?.message || 'Server down'}`, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -684,8 +689,9 @@ export default function App() {
       } else {
         showToast(data.message || 'Cannot apply booking', 'error');
       }
-    } catch (err) {
-      showToast('Booking failed. Network issues.', 'error');
+    } catch (err: any) {
+      console.error('Booking failed:', err);
+      showToast(`Booking failed: ${err?.message || 'Network issue'}`, 'error');
     } finally {
       setIsLoading(false);
     }

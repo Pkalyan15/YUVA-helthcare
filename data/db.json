@@ -1,0 +1,199 @@
+{
+  "users": [
+    {
+      "id": "user-demo",
+      "name": "Pavan Kalyan",
+      "email": "pavan@example.com",
+      "phone": "9019723646",
+      "gender": "Male",
+      "dob": "2004-05-26",
+      "address": "No. 12A/19, 9th Cross, JP Nagar, Bangalore",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "patient",
+      "passwordHash": "e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446"
+    },
+    {
+      "id": "user-1779786676824",
+      "name": "pavan",
+      "email": "anthatipavankalyan15@gmail.com",
+      "phone": "7799421642",
+      "gender": "Male",
+      "dob": "2006-03-15",
+      "address": "bangalore",
+      "role": "patient",
+      "passwordHash": "8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414"
+    },
+    {
+      "id": "user-1779787464816",
+      "name": "Test User",
+      "email": "test_1779787464746@example.com",
+      "phone": "1234567890",
+      "gender": "Male",
+      "dob": "1990-01-01",
+      "address": "Test Address",
+      "role": "patient",
+      "passwordHash": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc-emily-larson",
+      "name": "Dr. Emily Larson",
+      "email": "emily.larson@yuvacare.com",
+      "speciality": "Gynecologist",
+      "degree": "MBBS, MD - Gynecology",
+      "experience": "3 Years",
+      "about": "Dr. Emily Larson has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "fees": 70,
+      "address": "JP Nagar, Bangalore, India",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "09:00 AM",
+        "10:00 AM",
+        "11:00 AM",
+        "01:30 PM",
+        "02:00 PM",
+        "03:30 PM",
+        "04:00 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    },
+    {
+      "id": "doc-christopher-lee",
+      "name": "Dr. Christopher Lee",
+      "email": "christopher.lee@yuvacare.com",
+      "speciality": "Pediatrician",
+      "degree": "MBBS, MD - Pediatrics",
+      "experience": "5 Years",
+      "about": "Dr. Christopher Lee focuses on comprehensive physical, mental, and social health services for children ranging from birth through young adulthood.",
+      "fees": 80,
+      "address": "Rajshekar Hospital Road, Phase 1 JP Nagar, Bangalore",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "10:00 AM",
+        "10:30 AM",
+        "11:30 AM",
+        "02:30 PM",
+        "03:00 PM",
+        "04:30 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    },
+    {
+      "id": "doc-sarah-patel",
+      "name": "Dr. Sarah Patel",
+      "email": "sarah.patel@yuvacare.com",
+      "speciality": "Dermatologist",
+      "degree": "MBBS, DDVL - Dermatology",
+      "experience": "4 Years",
+      "about": "Dr. Sarah Patel specializes in aesthetic skin solutions, dermatology consultation, and treatment of allergic skin conditions.",
+      "fees": 75,
+      "address": "Indiranagar, Bangalore, India",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "09:30 AM",
+        "11:00 AM",
+        "12:00 PM",
+        "03:00 PM",
+        "04:00 PM",
+        "05:00 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    },
+    {
+      "id": "doc-alex-johnson",
+      "name": "Dr. Alex Johnson",
+      "email": "alex.johnson@yuvacare.com",
+      "speciality": "General physician",
+      "degree": "MBBS, MD - General Medicine",
+      "experience": "7 Years",
+      "about": "Dr. Alex Johnson is dedicated to acute primary care, preventative general treatment, and internal health diagnostics.",
+      "fees": 50,
+      "address": "HSR Layout, Bangalore, India",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "09:00 AM",
+        "10:00 AM",
+        "11:00 AM",
+        "12:00 PM",
+        "02:00 PM",
+        "03:00 PM",
+        "04:00 PM",
+        "05:00 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    },
+    {
+      "id": "doc-chloe-davis",
+      "name": "Dr. Chloe Davis",
+      "email": "chloe.davis@yuvacare.com",
+      "speciality": "Neurologist",
+      "degree": "MBBS, DM - Neurology",
+      "experience": "6 Years",
+      "about": "Dr. Chloe Davis provides specialized therapy and surgical consultancy for brain, nerve, and chronic spinal ailments.",
+      "fees": 110,
+      "address": "Koramangala, Bangalore, India",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "11:00 AM",
+        "11:30 AM",
+        "02:00 PM",
+        "03:30 PM",
+        "04:00 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    },
+    {
+      "id": "doc-ryan-evans",
+      "name": "Dr. Ryan Evans",
+      "email": "ryan.evans@yuvacare.com",
+      "speciality": "Gastroenterologist",
+      "degree": "MBBS, MD, DM - Gastroenterology",
+      "experience": "8 Years",
+      "about": "Dr. Ryan Evans specializes in diagnosing, treating and preventing disorders affecting the gastrointestinal tract and digestive system.",
+      "fees": 95,
+      "address": "Whitefield, Bangalore, India",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1637059824899-a441006a6875?auto=format&fit=crop&q=80&w=300&h=300",
+      "role": "doctor",
+      "availableTimeSlots": [
+        "10:00 AM",
+        "11:00 AM",
+        "01:30 PM",
+        "03:00 PM",
+        "04:30 PM"
+      ],
+      "passwordHash": "f348d5628621f3d8f59c8cabda0f8eb0aa7e0514a90be7571020b1336f26c113"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "appt-1779786996203",
+      "userId": "user-1779786676824",
+      "userName": "pavan",
+      "userEmail": "anthatipavankalyan15@gmail.com",
+      "userPhone": "7799421642",
+      "userGender": "Male",
+      "userDob": "2006-03-15",
+      "doctorId": "doc-emily-larson",
+      "doctorName": "Dr. Emily Larson",
+      "doctorSpeciality": "Gynecologist",
+      "doctorImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300",
+      "date": "2026-05-27",
+      "time": "10:00 AM",
+      "fees": 70,
+      "status": "Confirmed",
+      "createdAt": "2026-05-26T09:16:36.203Z"
+    }
+  ]
+}
